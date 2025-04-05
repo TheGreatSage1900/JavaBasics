@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.Utils.UserDetails;
+
 import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -26,6 +28,12 @@ public class Main {
         arr1[0] = 5;
         arr2[0] = 10;
 
+        // label
+        outerLoop:
+        for(int num : arr2)
+            if(num == 3)
+                break outerLoop;
+
         // Ternary Operator should return something
         int min = 0; int max = 7;
         int randomNum = new Random().nextInt(max - min + 1) + min;
@@ -50,10 +58,12 @@ public class Main {
 
         // switch with pattern matching
 
-        Object obj = "String";
+        UserDetails userDet = new UserDetails();
+        Object obj = userDet;
         switch(obj){
             case String s -> System.out.println("String");
             case Integer i -> System.out.println("Integer");
+            case UserDetails userDetails -> System.out.println("it's of type " + userDetails.getClass());
             default -> System.out.println("Default");
         }
 
