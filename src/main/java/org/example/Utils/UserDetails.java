@@ -9,4 +9,9 @@ public class UserDetails {
     int age;
     String location;
     String designation;
+    Details Details;
+
+    private static class Details {
+        String address;
+    }
 }
