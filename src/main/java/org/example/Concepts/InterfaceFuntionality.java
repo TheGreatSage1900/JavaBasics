@@ -9,7 +9,7 @@ package org.example.Concepts;
 
 
 // remote control example here interface lists common functionality which remove should have
-public interface InterfaceConcept {
+public interface InterfaceFuntionality {
 
 void powerOn();
 
@@ -18,7 +18,7 @@ void powerOff();
 void settings();
 }
 
-class TV implements InterfaceConcept{
+class TV implements InterfaceFuntionality{
 
     @Override
     public void powerOn() {
@@ -35,7 +35,8 @@ class TV implements InterfaceConcept{
 
     }
 
-class AC implements InterfaceConcept{
+}
+class AC implements InterfaceFuntionality{
 
     @Override
     public void powerOn() {
@@ -52,4 +53,11 @@ class AC implements InterfaceConcept{
 
     }
 }
+
+
+class Main{
+    public static void main(String[] args) {
+        InterfaceFuntionality ac = new AC();
+        ac.powerOn();
+    }
 }

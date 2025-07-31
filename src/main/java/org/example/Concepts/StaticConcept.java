@@ -1,5 +1,8 @@
 package org.example.Concepts;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StaticConcept {
 
     static {
@@ -10,6 +13,8 @@ public class StaticConcept {
     private int age;
     // value will be same for all the created objects
     private static int phoneNumber;
+
+
 
     private void show(){
         System.out.println(name + " " + age + " " + phoneNumber);
@@ -32,10 +37,12 @@ public class StaticConcept {
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
+
         StaticConcept staticConcept1 = new StaticConcept();
         staticConcept1.name = "jake1";
 
         StaticConcept staticConcept2 = new StaticConcept();
+        
         staticConcept2.name = "jake2";
 
         StaticConcept.phoneNumber = 424242;

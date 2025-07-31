@@ -1,52 +1,53 @@
 package org.example.Concepts;
 
-
-class SuperKeyWords{
-
+// Superclass
+class SuperKeyWords {
     String name = "Super Class";
 
     SuperKeyWords() {
+        // Default constructor
     }
 
     SuperKeyWords(String text) {
-        System.out.println("In SuperKey Words" + text);
+        System.out.println("In SuperKeyWords: " + text);
     }
 }
 
-
-public class KeyWords extends SuperKeyWords{
+// Subclass
+public class KeyWords extends SuperKeyWords {
 
     String name = "Keyword class";
 
-    static{
-        System.out.println("in static block");
+    final int a =5 ;
+
+    final String finalName = "Final String";
+
+
+    // Static block executes when the class is loaded
+    static {
+        System.out.println("In static block");
     }
 
-    // this() -> calls the current class constructor , must be the first line in the constructor
-    // super() -> calls the immediate super class constructor
+    // Default constructor - calls super class constructor explicitly
+    KeyWords() {
 
-    // this -> can be used anywhere which refers to current class members
-    // super -> can be used anywhere which refers to immediate super class members
-
-    KeyWords(){
-       super("text");
+        super("text");
+        
     }
 
-    KeyWords(String text){
-        System.out.println("Text "+ text);
+    // Overloaded constructor
+    KeyWords(String text) {
+        System.out.println("Text: " + text);
     }
 
-    void show(){
-        System.out.println(super.name);
-        System.out.println(this.name);
-
+    // Display method
+    void show() {
+        System.out.println(super.name);  // Access superclass variable
+        System.out.println(this.name);   // Access current class variable
     }
 
-    public static void main(String[] args) throws ClassNotFoundException {
-
+    public static void main(String[] args) {
         KeyWords keyWords = new KeyWords();
         keyWords.show();
-
-
     }
 }

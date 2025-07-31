@@ -11,8 +11,6 @@ public class SecondPackage extends AccessModifiers{
         secondPackage.protectedShow();
 
 
-
-
         // name can't be accessed since it's default and can be accessed only in the respective package
         //        secondPackage.name = "hello";
 

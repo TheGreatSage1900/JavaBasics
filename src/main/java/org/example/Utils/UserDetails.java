@@ -2,6 +2,8 @@ package org.example.Utils;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class UserDetails {
     long userId;
@@ -9,9 +11,5 @@ public class UserDetails {
     int age;
     String location;
     String designation;
-    Details Details;
-
-    private static class Details {
-        String address;
-    }
+    List<String> nickNames;
 }

@@ -1,71 +1,57 @@
 package org.example.Concepts;
 
+/*
+ Outer class can only be declared as either `public` or package-private (default).
+ Inner classes can use any access modifier: private, protected, public, or default.
+*/
 
+// Superclass to demonstrate access modifiers
+class TopAccessModifier {
 
-// outer Class can have only public and default access modifiers
-
-
-// inner class can have all the access modifiers
-
-
-
-//| Modifier    | Same Class | Same Package | Subclass (anywhere) | Other Classes |
-//        | ----------- | ---------- | ------------ | ------------------- | ------------- |
-//        | `private`   | ✅ Yes      | ❌ No         | ❌ No                | ❌ No          |
-//        | *(default)* | ✅ Yes      | ✅ Yes        | ❌ No                | ❌ No          |
-//        | `protected` | ✅ Yes      | ✅ Yes        | ✅ Yes               | ❌ No          |
-//        | `public`    | ✅ Yes      | ✅ Yes        | ✅ Yes               | ✅ Yes         |
-
-
-
-class TopAccessModifier{
-    // Can be accessed only in this class
+    // private: accessible only within this class
     private String name;
 
-    // this method can't be accessed from any other class
-    void show(){
+    // default (no modifier): accessible only within same package
+    void show() {
         System.out.println(name);
 
-
-
+        // Instantiating private inner class from within outer class
         InnerAccessModifier innerAccessModifier = new InnerAccessModifier();
         innerAccessModifier.age = 5;
     }
 
-    // This class can be accessed only from the outer class
-    private class InnerAccessModifier{
+    // private inner class
+    private class InnerAccessModifier {
         private int age;
     }
 
-    // this class can be accessed withing the package
-    class InnerDefaultClass{}
+    // default inner class (accessible within same package)
+    class InnerDefaultClass {}
 
-    // this class can be accessed additionally by the subclass of any package
-    class InnerProtectedClass{}
-
-
+    // protected inner class (accessible to subclasses even outside package)
+    protected class InnerProtectedClass {}
 }
 
+// Subclass to demonstrate protected access and default
+public class AccessModifiers extends TopAccessModifier {
 
+    // protected method: accessible to any subclass, even in other packages
+    protected void protectedShow() {
+        System.out.println("In protected show method");
+    }
 
- public class AccessModifiers extends TopAccessModifier{
+    // default variable (no modifier): accessible within same package
+    String name;
 
-     // protected can be accessed from subclass irrespective of the package
-     protected void protectedShow(){
-         System.out.println("In Protected show method");
-     }
-    // default access modifier can be accessed only with this package org.example. ( example in 2nd package org2.example)
-     String name;
+    public static void main(String[] args) {
 
-     public static void main(String[] args) {
+        // Creating instance of the superclass
+        TopAccessModifier topAccessModifier = new TopAccessModifier();
+        topAccessModifier.show(); // accessing default method
 
-         TopAccessModifier topAccessModifier = new TopAccessModifier();
-         topAccessModifier.show();
+        // Cannot access private inner class or private members here
+    }
 
-
-     }
-
-     // this class can be accessed additionally by the subclass of any package
-      class InnerProtectedClass{}
-
+    // protected inner class (redeclared): visible to subclass
+    protected class InnerProtectedClass {}
 }

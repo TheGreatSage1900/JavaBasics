@@ -1,89 +1,87 @@
 package org.example.Concepts;
 
-import lombok.Data;
-
-interface A{
+// Interface A
+interface A {
     // Blueprint of class
-
-    // can't be instantiated
-
-    // Can contain concrete methods (default) and abstract methods
-
-    // fields allowed of type static final
-
+    // Can't be instantiated
+    // Can contain abstract and default (concrete) methods
+    // Fields are implicitly public, static, and final
     String NAME = "hello";
 
     void showInheritance();
 
-    default void showDefaultInheritance(String text){
+    default void showDefaultInheritance(String text) {
         System.out.println(text);
     }
-
 }
 
-interface B{
+// Interface B
+interface B {
     void showInheritance();
-    default void showDefaultInheritance(String text){
+
+    default void showDefaultInheritance(String text) {
         System.out.println(text);
     }
 }
+
+// Encapsulation class
 class Encapsulation {
 
+    private String name;
+
+    // Encapsulation achieved through getters and setters
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
-        if (name != null && !name.isBlank())
+        if (name != null && !name.isBlank()) {
             this.name = name;
-        else
+        } else {
             System.out.println("Name is null or blank");
+        }
     }
-    public String name;
-
 }
 
-class Inheritance extends Encapsulation{
+// Inheritance class
+class Inheritance extends Encapsulation {
 
     String name;
 
-    public void show(){
-
-        System.out.println("In inheritance class");
+    public void show() {
+        System.out.println("In Inheritance class");
     }
 }
 
-public class OOPS extends Inheritance implements A,B{
+// Main class demonstrating OOP concepts
+public class OOPS extends Inheritance implements A, B {
+
     public static void main(String[] args) {
 
-        // Encapsulation
-
-        // Bundles variables and method in a single unit
-        // Goal:  restricts direct variable access using private access modifiers
+        // ✅ Encapsulation: Bundling data and methods together
         Encapsulation encapsulation = new Encapsulation();
         encapsulation.setName("Undertaker");
 
-
-        // Inheritance Access the Super class members with base class object
-        // subclass overrides same method
-        //Java supports single inheritance of classes
-        // Multi level inheritance
+        // ✅ Inheritance: Accessing superclass members
         OOPS oops = new OOPS();
         oops.name = "hello";
 
-        oops.showDefaultInheritance("hello");
+        // ✅ Interface default method (handled diamond problem)
+        oops.showDefaultInheritance("hello from Interface");
 
+        // Method from subclass
+        oops.show();
     }
 
+    // Implementing interface method
     @Override
     public void showInheritance() {
-
+        System.out.println("Overridden showInheritance()");
     }
 
+    // Resolving diamond problem using InterfaceName.super.method()
     @Override
     public void showDefaultInheritance(String text) {
-
-        // Diamond problem is solved by mentioning which method to use
-        A.super.showDefaultInheritance(text);
+        A.super.showDefaultInheritance(text); // You could use B.super as well
     }
 }

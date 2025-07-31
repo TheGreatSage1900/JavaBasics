@@ -1,24 +1,30 @@
 package org.example.Concepts;
 
-
-interface Human{
+// Interface with a single method
+interface Human {
     void speak();
 }
 
-
-// Simplifies the interface implements way without creating a class and implementing directly implement the method and use it
+// Demonstrates the use of anonymous inner class
 public class AnonymousClass {
     public static void main(String[] args) {
+
+        // Creating an anonymous class that implements Human
         Human human = new Human() {
             @Override
             public void speak() {
-                System.out.println("hello");
+                System.out.println("Hello");
             }
-    };
+        };
 
+        // Calling the overridden method
         human.speak();
 
-}
 
 
+        // is is simplified by funtional Interface
+
+        Human jake = () -> System.out.println("Jake is speaking");
+        jake.speak();
+    }
 }
