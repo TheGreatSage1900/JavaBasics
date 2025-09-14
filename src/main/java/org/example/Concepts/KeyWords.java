@@ -1,5 +1,7 @@
 package org.example.Concepts;
 
+import org.example.Utils.SimpleUser;
+
 // Superclass
 class SuperKeyWords {
     String name = "Super Class";
@@ -15,6 +17,9 @@ class SuperKeyWords {
 
 // Subclass
 public class KeyWords extends SuperKeyWords {
+
+    final SimpleUser simpleUser = new SimpleUser();
+
 
     String name = "Keyword class";
 
@@ -32,7 +37,7 @@ public class KeyWords extends SuperKeyWords {
     KeyWords() {
 
         super("text");
-        
+        simpleUser.setAge(5);
     }
 
     // Overloaded constructor
@@ -44,6 +49,7 @@ public class KeyWords extends SuperKeyWords {
     void show() {
         System.out.println(super.name);  // Access superclass variable
         System.out.println(this.name);   // Access current class variable
+        
     }
 
     public static void main(String[] args) {

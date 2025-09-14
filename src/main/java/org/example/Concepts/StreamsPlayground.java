@@ -5,6 +5,7 @@ import org.example.Utils.UserDetails;
 
 import java.security.cert.CollectionCertStoreParameters;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -162,6 +163,49 @@ public class StreamsPlayground {
 
         Map<Integer,List<String>> data3 = words45.stream().collect(Collectors.groupingBy(String::length));
         System.out.println(data3.get(words45.stream().map(String::length).reduce(Integer::max).orElse(-1)).toString());
+
+        // nested map playground
+
+        Map<String, Map<String, Object>> userRecords = new HashMap<>();
+
+        Map<String, Object> user1 = new HashMap<>();
+        user1.put("name", "Alice");
+        user1.put("age", 25);
+        user1.put("gender", "Female");
+
+        Map<String, Object> user2 = new HashMap<>();
+        user2.put("name", "Bob");
+        user2.put("age", 30);
+        user2.put("gender", "Male");
+
+        Map<String, Object> user3 = new HashMap<>();
+        user3.put("name", "Charlie");
+        user3.put("age", 28);
+        user3.put("gender", "Non-binary");
+
+        userRecords.put("user_1", user1);
+        userRecords.put("user_2", user2);
+        userRecords.put("user_3", user3);
+
+        System.out.println(userRecords.values().stream().collect(Collectors.groupingBy(d -> d.get("age"),Collectors.mapping(e -> e.get("name"),Collectors.toList()))));
+
+
+        // Class playground
+
+        List<SimpleUser> users = new ArrayList<>();
+
+        users.add(new SimpleUser("Alice", 25));
+        users.add(new SimpleUser("Bob", 30));
+        users.add(new SimpleUser("Charlie", 22));
+        users.add(new SimpleUser("Diana", 28));
+        users.add(new SimpleUser("Ethan", 35));
+
+        System.out.println(users.stream().filter(user -> user.getAge()>20).findAny().get());
+
+        System.out.println(users.stream().map(SimpleUser::getAge).reduce(Integer::sum));
+
+        System.out.println(users.stream().map(SimpleUser::getAge).reduce(Integer::sum));
+
 
     }
 }
