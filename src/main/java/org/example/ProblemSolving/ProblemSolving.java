@@ -1,6 +1,43 @@
 package org.example.ProblemSolving;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 public class ProblemSolving {
+
+    static boolean checkPallindrome(String input){
+        String reverseString = reverseString(input,1);
+        return input.toLowerCase().equalsIgnoreCase(reverseString);
+    }
+
+    static Map<Character,Long> frequencyCount(String input){
+        return input.toLowerCase().chars().mapToObj(c -> (char)c).collect(Collectors.groupingBy(cha->cha,Collectors.counting()));
+    }
+
+    static Map<String, Integer> countConsonantsVowels(String input, int method) {
+        return switch (method) {
+            case 1 -> {
+                input = input.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
+                int consonantsCount = input.replaceAll("[aeiou]", "").length();
+                int vowelsCount = input.length() - consonantsCount;
+                yield Map.of("ConsonantsCount", consonantsCount, "VowelsCount", vowelsCount);
+            }
+            case 2 -> {
+                int consonants = 0;
+                int vowels = 0;
+                List<Character> vowelsList = List.of('a', 'e', 'i', 'o', 'u');
+                input = input.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
+                for (int i = 0; i < input.length(); i++) {
+                    if (vowelsList.contains(input.charAt(i))) vowels++;
+                    else consonants++;
+                }
+                yield Map.of("ConsonantsCount", consonants, "VowelsCount", vowels);
+            }
+            default -> Map.of(); // return empty map instead of null
+        };
+    }
+
 
     static String reverseString(String input, int method) {
         return switch (method) {
@@ -33,11 +70,12 @@ public class ProblemSolving {
                 }
                 yield new String(charArray);
             }
-            default -> null;
+            default -> "";
         };
     }
 
     public static void main(String[] args) {
-        System.out.println(reverseString("hellofadsfsadfas sdfasdfasdf",3));
+        System.out.println(frequencyCount("Malayalam"));
+
     }
 }
